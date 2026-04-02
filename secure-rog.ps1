@@ -1,6 +1,6 @@
-# ROG Zephyrus Windows Security Hardening — OpenClaw Edition
+﻿# ROG Zephyrus Windows Security Hardening -- OpenClaw Edition
 #
-# Usage: Right-click PowerShell → Run as Administrator → cd into repo folder → .\secure-rog.ps1
+# Usage: Right-click PowerShell -> Run as Administrator -> cd into repo folder -> .\secure-rog.ps1
 
 #Requires -RunAsAdministrator
 
@@ -8,14 +8,14 @@
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 if (-not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "ERROR: This script must be run as Administrator." -ForegroundColor Red
-    Write-Host "Right-click PowerShell → Run as Administrator, then re-run this script." -ForegroundColor Yellow
+    Write-Host "Right-click PowerShell -> Run as Administrator, then re-run this script." -ForegroundColor Yellow
     exit 1
 }
 
 $results = @{}
 
 # ============================================================================
-# STEP 1 — Lock local models to localhost
+# STEP 1 -- Lock local models to localhost
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
@@ -53,7 +53,7 @@ try {
 }
 
 # ============================================================================
-# STEP 2 — Install Tailscale
+# STEP 2 -- Install Tailscale
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
@@ -63,7 +63,7 @@ try {
     winget install Tailscale.Tailscale --accept-source-agreements --accept-package-agreements
     Write-Host "`nAfter install, run:" -ForegroundColor Yellow
     Write-Host "  tailscale up --ssh" -ForegroundColor White
-    Write-Host "`nWARNING: Use 'tailscale serve' only. NEVER use 'tailscale funnel' — it exposes services to the public internet." -ForegroundColor Red
+    Write-Host "`nWARNING: Use 'tailscale serve' only. NEVER use 'tailscale funnel' -- it exposes services to the public internet." -ForegroundColor Red
 
     $results["Step 2 - Install Tailscale"] = "PASSED"
 } catch {
@@ -72,7 +72,7 @@ try {
 }
 
 # ============================================================================
-# STEP 3 — Enable firewall and stealth mode
+# STEP 3 -- Enable firewall and stealth mode
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
@@ -97,7 +97,7 @@ try {
 }
 
 # ============================================================================
-# STEP 4 — Set Open WebUI security variables
+# STEP 4 -- Set Open WebUI security variables
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
@@ -124,7 +124,7 @@ try {
 }
 
 # ============================================================================
-# STEP 5 — Update Docker Desktop
+# STEP 5 -- Update Docker Desktop
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
@@ -132,7 +132,7 @@ try {
     Write-Host "========================================" -ForegroundColor Cyan
 
     winget upgrade Docker.DockerDesktop --accept-source-agreements --accept-package-agreements
-    Write-Host "WARNING: CVE-2025-9074 — container escape vulnerability. Ensure Docker Desktop is fully up to date." -ForegroundColor Red
+    Write-Host "WARNING: CVE-2025-9074 -- container escape vulnerability. Ensure Docker Desktop is fully up to date." -ForegroundColor Red
 
     $results["Step 5 - Update Docker Desktop"] = "PASSED"
 } catch {
@@ -141,7 +141,7 @@ try {
 }
 
 # ============================================================================
-# STEP 6 — Install SimpleWall (outbound monitor, LuLu equivalent)
+# STEP 6 -- Install SimpleWall (outbound monitor, LuLu equivalent)
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
@@ -150,7 +150,7 @@ try {
 
     winget install Henry++.simplewall --accept-source-agreements --accept-package-agreements
     Write-Host "WARNING: Windows Firewall only blocks inbound. SimpleWall watches outbound." -ForegroundColor Yellow
-    Write-Host "Do NOT stack with GlassWire — pick one outbound monitor." -ForegroundColor Red
+    Write-Host "Do NOT stack with GlassWire -- pick one outbound monitor." -ForegroundColor Red
 
     $results["Step 6 - Install SimpleWall"] = "PASSED"
 } catch {
@@ -159,7 +159,7 @@ try {
 }
 
 # ============================================================================
-# BONUS — Check for API keys in config files
+# BONUS -- Check for API keys in config files
 # ============================================================================
 try {
     Write-Host "`n========================================" -ForegroundColor Cyan
